@@ -1,0 +1,43 @@
+---
+description: 每次让你生成提交信息的时候，请按照angular commit规范来给我生成
+globs: 
+---
+# Angular 提交信息生成规则
+
+## 步骤 1: 选择提交类型
+<|Select|>
+- 选项: 
+  - feat: 新增功能
+  - fix: 修复缺陷
+  - docs: 文档更新
+  - style: 代码格式调整（不影响功能）
+  - refactor: 代码重构（既不是新增功能，也不是修复缺陷）
+  - test: 测试相关更改
+  - chore: 构建过程或辅助工具的变动
+- 输出键: commitType
+
+## 步骤 2: 输入修改范围（可选）
+<|Input|>
+- 提示: 请输入修改涉及的具体范围（例如某个模块、组件等，若没有可留空）
+- 输出键: scope
+
+## 步骤 3: 简要描述修改内容
+<|Input|>
+- 提示: 请用简短的语句描述本次代码修改的核心内容
+- 输出键: description
+
+## 步骤 4: 详细描述修改原因（可选）
+<|Input|>
+- 提示: 请详细说明本次修改的原因和背景信息（若没有可留空）
+- 输出键: body
+
+## 步骤 5: 关联 Issue 编号（可选）
+<|Input|>
+- 提示: 请提供与本次修改相关的 issue 编号（格式如 'Closes #123' 或 'Relates to #456'，若没有可留空）
+- 输出键: footer
+
+## 步骤 6: 生成提交信息
+<|Template|>
+- 模板: "{{#if scope}}{{commitType}} ({{scope}}): {{description}}{{else}}{{commitType}}: {{description}}{{/if}}\n\n{{body}}\n\n{{footer}}"
+- 输入键: commitType, scope, description, body, footer
+- 输出键: commitMessage
